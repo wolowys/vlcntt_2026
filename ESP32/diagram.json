@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "author": "Nhom 13",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -120,
+      "left": -150,
+      "attrs": { "temperature": "36.4" }
+    },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "mq2",
+      "top": -220,
+      "left": 50,
+      "attrs": { "travelLength": "30" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -150,
+      "left": 200,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_green",
+      "top": 180,
+      "left": -120,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_yellow",
+      "top": -80,
+      "left": -120,
+      "attrs": { "color": "yellow" }
+    },
+    { "type": "wokwi-led", "id": "led_red", "top": 180, "left": -40, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 230,
+      "left": -120,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-resistor", "id": "r2", "top": 230, "left": -80, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r3", "top": 230, "left": -40, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 180, "left": 40, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": 180, "left": 120, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_mute",
+      "top": 300,
+      "left": -100,
+      "attrs": { "label": "MUTE" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_reset",
+      "top": 300,
+      "left": -30,
+      "attrs": { "label": "RESET" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_test",
+      "top": 300,
+      "left": 40,
+      "attrs": { "label": "TEST" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht1:GND", "esp:GND.1", "black", [] ],
+    [ "dht1:SDA", "esp:15", "green", [] ],
+    [ "mq2:VCC", "esp:3V3", "red", [] ],
+    [ "mq2:GND", "esp:GND.1", "black", [] ],
+    [ "mq2:SIG", "esp:34", "blue", [] ],
+    [ "lcd1:GND", "esp:GND.1", "black", [] ],
+    [ "lcd1:VCC", "esp:5V", "red", [] ],
+    [ "lcd1:SDA", "esp:21", "green", [] ],
+    [ "lcd1:SCL", "esp:22", "green", [] ],
+    [ "esp:18", "led_green:A", "green", [] ],
+    [ "esp:19", "led_yellow:A", "yellow", [] ],
+    [ "esp:23", "led_red:A", "red", [] ],
+    [ "led_green:C", "r1:1", "black", [] ],
+    [ "led_yellow:C", "r2:1", "black", [] ],
+    [ "led_red:C", "r3:1", "black", [] ],
+    [ "r1:2", "esp:GND.2", "black", [] ],
+    [ "r2:2", "esp:GND.2", "black", [] ],
+    [ "r3:2", "esp:GND.2", "black", [] ],
+    [ "esp:25", "bz1:2", "purple", [] ],
+    [ "bz1:1", "esp:GND.2", "black", [] ],
+    [ "esp:26", "relay1:IN", "orange", [] ],
+    [ "relay1:VCC", "esp:5V", "red", [] ],
+    [ "relay1:GND", "esp:GND.2", "black", [] ],
+    [ "btn_mute:1.r", "esp:GND.3", "black", [] ],
+    [ "btn_mute:2.r", "esp:13", "blue", [] ],
+    [ "btn_reset:1.r", "esp:GND.3", "black", [] ],
+    [ "btn_reset:2.r", "esp:12", "blue", [] ],
+    [ "btn_test:1.r", "esp:GND.3", "black", [] ],
+    [ "btn_test:2.r", "esp:14", "blue", [] ]
+  ],
+  "dependencies": {}
+}
